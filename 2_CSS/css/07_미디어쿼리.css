@@ -1,0 +1,77 @@
+body,
+p,
+h3 {
+  margin: 0;
+}
+.container {
+  background-color: cornflowerblue;
+}
+#con-1 {
+  font-size: 0;
+}
+/* - ::after 가상 
+   - 글씨(content)가 있어야 해당 글씨로 빈 곳이 채워짐
+   - 채워진 글씨를 비노출 처리 하기 위해 visibility: hidden 사용 
+   - 글씨를 '' 으로 설정 시 텍스트 없이 가능 (content: ''*/
+#con-2::after {
+  content: "Clear!";
+  clear: both;
+  visibility: hidden;
+  display: block;
+  height: 0;
+}
+
+.item-inline-block {
+  display: inline-block;
+  font-size: 1rem;
+  vertical-align: top;
+}
+.item-style-1 {
+  background-color: paleturquoise;
+}
+.item-style-2 {
+  background: palevioletred;
+}
+
+/* - float : 컨테이너에 대한 간격을 생각하지 않음
+   - flpat 사용 시에는 clear 함께 사용 함 */
+.item-float {
+  float: left;
+}
+
+footer {
+  background-color: darkgray;
+  padding: 5%;
+  /* clear: both; */
+}
+
+/* 미디어 쿼리 */
+/* 
+700px 아래에 해당하는 화면 적용
+*/
+/* 700px 이상부터 적용 */
+@media screen and (min-width: 700px) {
+  .item-mediaquery {
+    float: left;
+  }
+  .item-style-1 {
+    width: 40%;
+  }
+  .item-style-2 {
+    width: 60%;
+  }
+  #con-3::after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+  /* body {
+    background: black;
+  } */
+}
+/* 1200px 이상부터 적용 */
+@media screen and (min-width: 1200px) {
+  body {
+    background: red;
+  }
+}

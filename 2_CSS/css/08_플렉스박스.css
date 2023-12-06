@@ -1,0 +1,84 @@
+.container {
+  height: 100vh;
+  background: lightgray;
+
+  /* 1. display:flex; */
+  display: flex;
+
+  /* 2. flex-direction */
+  flex-direction: column;
+  flex-direction: column-reverse;
+  flex-direction: row-reverse;
+  flex-direction: row;
+
+  /* 3. flex-warp */
+  flex-wrap: wrap;
+  flex-wrap: wrap-reverse;
+  flex-wrap: nowrap; /* 기본값 */
+
+  /*4. justify-content */
+  /* - row-reverse : 오른쪽 끝에서부터 1~5
+   - justify-content: flex-end : 오른쪽 끝에 붙어서 좌측부터 순서대로 1~5 */
+  justify-content: flex-end;
+  /* - sapce-between : 브라우저 양 끝에 공간없이 각 컨텐츠 사이 간격만 균일하게 설정
+     - space-around : 양 끝 간격 1, 컨텐츠 사이 간격 2(각 컨텐츠 좌우측에 1씩 설정
+     - space-evenly : 양 끝 간격과 컨텐츠 사이 간격 모두 동일하게 설정 
+     */
+  justify-content: space-between;
+  justify-content: space-around;
+  justify-content: space-evenly;
+  /* center : 양 끝에 동일한 간격을 주고 컨텐츠를 가운데 정렬 */
+  justify-content: center;
+  justify-content: flex-start; /* 기본값 */
+
+  /* 5. align-items */
+  align-items: flex-start;
+  align-items: flex-end;
+  align-items: center;
+  align-items: stretch; /* 기본값 */
+
+  /* 6. align-content */
+  align-content: flex-end;
+  align-content: center;
+  /* 컨텐츠가 2줄 이상이 되었을 때 줄 사이 간격 생성 */
+  align-content: space-between;
+}
+
+.item {
+  background-color: white;
+  border: 3px solid black;
+  padding: 1rem;
+
+  /* flex */
+  flex-basis: auto; /* 기본값 */
+  flex: 1; /* 컨텐츠 영역을 균일하게 공동분배 */
+}
+/* flex-grow
+   - 빈 틈없이 채우고 싶을 때
+   - 빈공간이 있을 때 해당 아이템을 지정한 숫자만큼의 비율로 채운다.
+*/
+.item:nth-child(1) {
+  /* flex-grow: 1; */
+  align-self: flex-start;
+  order: 2;
+}
+.item:nth-child(2) {
+  /* flex-grow: 5; */
+  align-self: center;
+  order: 3;
+}
+.item:nth-child(3) {
+  /* flex-grow: 2; */
+  align-self: flex-end;
+  order: 1;
+}
+.item:nth-child(4) {
+  /* flex-grow: 3; */
+}
+.item:nth-child(5) {
+  /* flex-grow: 1; */
+}
+.item img {
+  width: 95px;
+  height: 95px;
+}
