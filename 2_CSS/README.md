@@ -106,7 +106,7 @@ rgba(red(0~255), green(0~255), blue(0~255), alpha(0~1));
 - https://user-images.githubusercontent.com/26870393/171997651-ad16e3e9-f88c-490b-b052-b7cb6235f8f7.png
 - 모든 요소들은 사각형 박스로 표현되는데 스타일 시트에서는 박스 형태인 요소를 박스 모델이라고 한다.
 - CSS를 사용하면 박스 모델 요소의 크기, 위치, 속성을 변경할 수 있다.
-- 박스 모델은 콘텐츠(content) 영역과 테두리(border)와 콘텐츠 영역 사이의 여백인 패딩(padding), 박스 모델 사이의 여백인 마진(margin)으로 구성된다.
+- 박스 모델은 콘텐츠(content) 영역과 테두리(border)와 콘텐츠 영역 사이의 여백인 패딩(padding), block박스 모델 사이의 여백인 마진(margin)으로 구성된다.
 
 ## 포지셔닝
 
@@ -131,16 +131,16 @@ rgba(red(0~255), green(0~255), blue(0~255), alpha(0~1));
 - title, meta tag 두가지 (head 태그에 주로 쓰이는 태그)
 - viewport(스마트폰 화면에서 실제 내용이 표시되는 영역) 작성
 
-````html
-<meta name="viewport" content="속성1=값, 속성2=값, ...." />```
-````
+```html
+<meta name="viewport" content="속성1=값, 속성2=값, ...." />
+```
 
 - width : viewport의 너비 (device-width or 크기(px, % 등))
 - height : viewport의 높이 (device-height or 크기(px, % 등)) <!-- width만 사용하는 경우가 많음 -->
 - user-scalable : 확대/축소 가능 여부 (yes or no, yes : 기본값) <!-- 손으로 화면 확대/축소 가능 여부 -->
 - initial-scale : 초기 확대/축소 값 (1~10, 1 : 기본값)
 - minimum-scale : 최소 확대/축소 값 (0~10, 0.25 : 기본값) <!-- 0.25로 설정할 경우 0.25까지 축소 가능하다는 의미 -->
-- amximum-scale : 최대 확대/축소 값 (0~10, 1.6 : 기본값)
+- maximum-scale : 최대 확대/축소 값 (0~10, 1.6 : 기본값)
 
 ## 미디어쿼리(Media Queries)
 
@@ -159,7 +159,7 @@ rgba(red(0~255), green(0~255), blue(0~255), alpha(0~1));
 }
 ```
 
-# Flex(Flexibel Box, Flexbox)
+# Flex(Flexible Box, Flexbox)
 
 - CSS 레이아웃 모델로 화면 크기에 따라 레이아웃의 배치나 크기를 조절할 때 편리하게 사용
 
@@ -333,5 +333,77 @@ rgba(red(0~255), green(0~255), blue(0~255), alpha(0~1));
 ```css
 .item {
   order: 0 or 숫자;
+}
+```
+
+# Grid
+
+- CSS 레이아웃 모델로 한 방향 레이아웃인 flex와 달리 두 방향(가로-세로) 레이아웃
+
+```html
+<div class="container">
+  <div class="item"></div>
+  <div class="item"></div>
+  <div class="item"></div>
+</div>
+```
+
+## display: grid;
+
+- Grid 컨테이너에 display: grid;를 적용하면서 시작
+<!-- flex의 경우 display: flex; 를 적용해야 사용 가능 -->
+
+```css
+.container {
+  display: grid;
+}
+```
+
+## grid-template-rows, grid-template-columns
+
+- 컨테이너에 Grid 트랙(행 또는 열)의 크기들을 지정해주는 속성
+
+```css
+.container {
+  /* 첫 번째 행은 200px로 맞추고 두 번째 행은 500px로 맞춤
+     (몇 개의 행으로 분할할건지 지정) */
+  grid-template-columns: 200px 500px;
+}
+```
+
+### auto-fill, auto-fit
+
+- column의 개수를 미리 정하지 않고 설정된 너비가 허용하는 한 최대한 셀을 채움
+- auto-fill은 셀의 개수가 모자라면 공간이 남지만, auto-fil은 채움
+
+## row-gap, column-gap, gap
+
+- 그리드 셀 사이의 간격을 설정하는 속성
+- 예전 브라우저에서는 grid-gap 사용
+- row-gap : 행 간 간격 설정
+- column-gap : 열 간 간격 설정
+- gap : 행/열 간격 모두 설정
+
+## grid-auto-columns, grid-auto-rows
+
+<!-- 통제를 벗어난 위치 : 총 3개 열 중 2개 열만 크기 지정 시 3번째 열 -->
+
+- 통제를 벗어난 위치에 있는 트랙의 크기를 지정하는 속성
+
+## grid-column-start, grid-column-end, grid-column, grid-row-start, grid-row-end, grid-row
+
+- 각 셀의 영역을 지정하는 속성
+
+```css
+.item {
+  grid-column: 1/4;
+  /* grid-column: 1/4;와 동일 */
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+  grid-row: 2/4;
+  /* grid-row: 2/4;와 동일 */
+  grid-row-start: 2;
+  grid-row-end: 4;
 }
 ```

@@ -12,7 +12,8 @@ h3 {
 /* - ::after 가상 
    - 글씨(content)가 있어야 해당 글씨로 빈 곳이 채워짐
    - 채워진 글씨를 비노출 처리 하기 위해 visibility: hidden 사용 
-   - 글씨를 '' 으로 설정 시 텍스트 없이 가능 (content: ''*/
+   - 글씨를 '' 으로 설정 시 텍스트 없이 가능 (content: ''
+*/
 #con-2::after {
   content: "Clear!";
   clear: both;
