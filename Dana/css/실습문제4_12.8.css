@@ -1,6 +1,6 @@
 header {
+  border-bottom: 0.5px solid lightgray;
   text-align: center;
-  border-bottom: 1px solid #eee;
 }
 header h1 {
   font-size: 2rem;
@@ -8,126 +8,130 @@ header h1 {
   padding: 10px;
 }
 header nav {
-  background-color: aqua;
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
+  height: 60px;
 }
 header a {
-  background-color: yellow;
-  color: gray;
+  display: inline-block;
+  line-height: 40px;
   padding: 10px;
+  width: 100px;
+  font-size: 14px;
+  color: gray;
+  justify-content: space-evenly;
+  box-sizing: border-box;
 }
-main {
-  text-align: center;
-  font-weight: bold;
-  padding: 20px;
+header nav a:hover {
+  background-color: black;
+  color: white;
 }
-main h2 {
-  font-size: 3rem;
-  margin-bottom: 15px;
-}
-main h3 {
-  font-size: 2.2rem;
-}
+
 #main-content {
+  text-align: center;
+  /* margin: 40px; */
+  padding: 20px;
+  font-weight: bold;
+}
+#main-content h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+#main-content h3 {
+  font-size: 2.5rem;
+}
+#circle {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-#main-content .circle {
+#circle div {
+  display: flex;
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-color: black;
   color: white;
-  display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
   font-weight: bold;
-  margin: 20px;
+  margin: 10px;
+  margin-bottom: 20px;
 }
-#main-content .circle:nth-child(1) {
+#circle div:nth-child(1) {
   background-color: indianred;
 }
-#main-content .circle:nth-child(2) {
+#circle div:nth-child(2) {
   background-color: coral;
 }
-#main-content .circle:nth-child(3) {
+#circle div:nth-child(3) {
   background-color: cadetblue;
 }
-#main-content .circle:nth-child(4) {
+#circle div:nth-child(4) {
   background-color: steelblue;
 }
 #contents {
   padding: 10px;
 }
-#contents h2 {
+#contents h4 {
   font-size: 1.8rem;
   font-weight: bold;
-  padding-bottom: 10px;
 }
-.article-content {
+
+.article-container {
   margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
-.article-content img {
+
+.article-container img {
   width: 100%;
   margin-bottom: 10px;
 }
-.aside-content {
+.aside-container div {
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  margin: 10px;
 }
-.aside-content img {
+.aside-container img {
   width: 30%;
   margin-right: 10px;
 }
-@media screen and (min-width: 720px) {
-  #main-content .circle {
+
+@media screen and (min-width: 677px) {
+  #circle div {
     width: 250px;
     height: 250px;
     margin: 40px;
   }
 }
+
 @media screen and (min-width: 800px) {
-  header h1 {
-    position: absolute;
-    top: 0px;
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
   header nav {
     display: flex;
     justify-content: space-between;
-    height: 60px;
   }
   header nav > * {
+    /* header nav 아래에 있는 태그 전체 */
     width: 100%;
   }
-  header nav a {
-    display: inline-block;
-    line-height: 40px;
-  }
-  .article-container {
-    display: flex;
-  }
-  .article-content {
-    width: 50%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+  header h1 {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
 
-@media screen and (min-width: 977px) {
-  #main-content .circle {
+@media screen and (min-width: 1007px) {
+  #circle div {
     width: 200px;
     height: 200px;
     margin: 20px;
   }
 }
+
 @media screen and (min-width: 1200px) {
   header {
     display: flex;
@@ -143,7 +147,20 @@ main h3 {
   #contents {
     display: flex;
   }
-  #contents article {
+  #contents-article {
     margin-right: 20px;
   }
 }
+
+/* #content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.article-contaner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+} */
