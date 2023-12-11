@@ -1,0 +1,43 @@
+body {
+  height: 100vh;
+  background: linear-gradient(45deg, black, blue);
+  /* container 전체를 가운데 정렬 하기 위해서는 container의 부모요소인 body에 display 적용 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  display: flex;
+}
+.square {
+  background: white;
+  width: 10px;
+  height: 50px;
+  margin: 3px;
+  border-radius: 10px;
+  animation: squareScale 1s linear infinite;
+}
+.square:nth-child(2),
+.square:nth-child(6) {
+  animation-delay: 0.1s;
+}
+.square:nth-child(3),
+.square:nth-child(5) {
+  animation-delay: 0.2s;
+}
+.square:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+/* 애니메이션(변형함수)을 적용할 때는 @keyframes 사용 */
+@keyframes squareScale {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(1.8);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}

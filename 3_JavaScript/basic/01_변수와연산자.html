@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>변수와 연산자</title>
+    <script>
+      //   // 출력
+      //   document.write(111);
+      //   console.log(222);
+      //   alert(333);
+    </script>
+    <script src="script.js"></script>
+    <script
+      src="https://kit.fontawesome.com/4602e82315.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!-- <i class="fa-brands fa-apple"></i> -->
+
+    <h1>변수</h1>
+    <p>어떠한 값을 저장하는 공간</p>
+    <!-- var, const, let -->
+    <script>
+      // 옛날 방식 - 거의 사용하지 않음
+      //varA: 임의로 지은 이름, = : '같다'는 등호 아님, 값을 변수에 '담아낸다'는 의미
+      var varA = 100; // var 변수 = 값;
+      console.log(varA); // 100
+      varA = "ㅋㅋㅋ";
+      console.log(varA); // ㅋㅋㅋ
+
+      // 상수 - 값(데이터)을 수정할 수 없다. (자주 사용 함)
+      const constB = 200; // const 변수 = 값;
+      console.log(constB); // 200
+      // constB = 300; // Uncaught TypeError
+      // const는 상수이기 때문에 var와 다르게 변경할 값을 작성 후 저장하더라도 저장 안됨.
+      // f12에서 오류 확인 가능(Uncaught TypeError) / 오류가 있을 경우 다음 변수들 노출 안됨
+
+      // 변수 - 값(데이터)을 수정할 수 있다. (가끔 사용 함)
+      let letC = 300;
+      console.log(letC); // 300
+      letC = "zzz";
+      console.log(letC); // zzz
+
+      // typeof : 데이터의 타입을 확인
+      console.log(typeof constB); // number
+      console.log(typeof letC); //string
+    </script>
+
+    <!-- 기본 데이터 타입 -->
+    <!-- 문자열 -->
+    <script>
+      let message = '"안녕" 이라고 말해';
+      //   message = "|"안녕" 이라고 말해"
+      console.log(message);
+      console.log(message[1]); // 안(문자열 안에서 첫 번째)
+      // 문자열의 길이(텍스트 수, 띄어쓰기 포함)
+      console.log(message.length); // 11
+
+      console.log("누군가에게", message); // 누군가에게 "안녕" 이라고 말해 (, : 문자열과 message 사이 띄워 씀)
+      console.log("누군가에게" + message); // 누군가에게"안녕" 이라고 말해 (+ : 문자열과 message 사이 붙여 씀)
+      console.log(`누군가에게 ${message}`); // 누군가에게 "안녕" 이라고 말해 / (`문자열 ${message}`);
+
+      const name = "기린이";
+      const age = 2;
+      console.log(`안녕? 내 이름은 ${name}이고, 나이는 ${age}살`); // 안녕? 내 이름은 기린이이고, 나이는 2살
+    </script>
+
+    <!-- 숫자 -->
+    <script>
+      const num1 = 10;
+      const num2 = 3;
+      console.log(num1 + num2); // 13
+      console.log(num1 - num2); // 7
+      console.log(num1 * num2); // 30
+      console.log(num1 / num2); // 3.3333333333333335
+      console.log(num1 % num2); // 나눈 나머지 값 : 1
+      console.log(num1 ** num2); // 제곱 값 : 10^3 = 1000
+
+      // 문자열을 숫자로 변환
+      console.log(typeof "100"); // string
+      console.log(typeof Number("100")); // number
+      console.log(Number("Hello")); // NaN
+
+      // 숫자를 문자열로 변환
+      console.log(typeof String(200)); // string
+
+      // 실수를 정수로 변환
+      console.log(parseInt(1.8)); // 1
+    </script>
+
+    <!-- undefined, null -->
+    <script>
+      let test;
+      console.log(test); // undefined > 정의되지 않음(test에 값을 매기지 않았을 때)
+
+      test = null;
+      console.log(test); // null > 아무것도 없음(test를 'null' 이라고 입력했을 때)
+    </script>
+
+    <!-- Boolean(결과 값)과 비교 연산자 -->
+    <script>
+      console.log(true);
+      console.log(false);
+      let num3 = 100;
+      let num4 = 200;
+      console.log(num3 < num4); // true
+      console.log(num3 > num4); // false
+      console.log(num3 <= num4); // true
+
+      num4 = 100; // > A
+      num4 = "100"; // > B
+      console.log(num3 == num4); // true (== : '같다' 등호)
+      console.log(num3 != num4); // false (!= : '다르다' 등호)
+
+      // 데이터 타입까지 체크
+      console.log(num3 === num4); // (A)true (B)false (데이터 타입 : num3(숫자), num4(문자열))
+      console.log(num3 !== num4); // (A)false (B)true (데이터 타입 : num3(숫자), num4(문자열))
+
+      // 다른 자료형을 Boolean으로 변환
+      // false : 0, NaN, "", null, undefined
+      // 나머지는 true
+      console.log(Boolean(0)); // false
+      console.log(Boolean(1)); // true
+    </script>
+
+    <!-- 논리 연산자 -->
+    <script>
+      const a = 100;
+      const b = 200;
+
+      // && : 그리고(and) | 모든 조건이 true가 아닐 경우 결과 값 : false
+      console.log(a < 200 && a == 100); // true
+      console.log(a < 200 && a == 200); // false('a == 200'가 false)
+
+      // || : 또는(or) | 하나의 조건이라도 true일 경우 결과 값 : true
+      console.log(a > 200 || a == 100); // false || true = true
+      console.log(a > 200 || a != 100); // false || false = false
+
+      // ! : 아니다(not)
+      console.log(!true); // false
+      console.log(!false); // true
+      console.log(!!(a > b)); // false
+    </script>
+  </body>
+</html>
