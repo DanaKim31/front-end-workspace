@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  background: linear-gradient(purple, pink);
+  padding: 40px;
+}
+.profile-card {
+  border: 2px solid white;
+  border-radius: 7px;
+  width: 350px;
+  margin: auto; /* 양 끝 margin을 동일하게 설정*/
+  text-align: center;
+  padding: 20px;
+}
+.profile-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover; /* 이미지 가운데 부분을 설정한 크기만큼 잘라서 노출 */
+  border-radius: 50%;
+}
+.profile-card h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+}
+.profile-card a {
+  border: 2px solid white;
+  color: white;
+  font-weight: bold;
+  display: block;
+  justify-content: center;
+  padding: 10px;
+  margin: 15px 0;
+}
+.profile-card a:hover {
+  background-color: white;
+  color: black;
+}
