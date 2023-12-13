@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>함수</title>
+  </head>
+  <body>
+    <h1>함수</h1>
+
+    <!-- 선언적 함수 -->
+    <script>
+      // function 함수명(입력값==매개변수==파라미터) {return 결과값;}
+      // 매개변수, 결과값 : 필수적인 요소 아님
+      // ㄴ> 매개변수, 결과값 모두 입력/미입력, 매개변수만 입력, 결과값만 입력 (4가지)
+      // 참고 : 함수명은 camelCase(낙타표기법)로 작성
+      function sample() {
+        console.log("ㅋㅋㅋㅋㅋㅋ");
+      }
+      sample();
+
+      function plus(a, b) {
+        return a + b;
+      }
+      plus(10, 20); // 30
+      console.log(plus(10, 20)); // console에 출력!
+
+      const result = plus(10, 20);
+      console.log(result); // 함수명을 변수(const result)에 담아서 출력도 가능
+
+      const sample1 = sample();
+      console.log(sample1); // undefined -> return 값이 없기 때문에 undefined
+
+      // 두 수의 값을 더하는 계산
+      console.log(plus(3, 7));
+      console.log(plus(4, 9));
+      console.log(plus(5, 6));
+    </script>
+
+    <!-- 변수의 유효범위(Scope) -->
+    <script>
+      const num1 = 100;
+
+      function sample2() {
+        const num1 = 200; // sample2 함수의 범위({}) 안에서만 사용하겠다는 의미
+        console.log(`sample2 내부 : ${num1}`); // 200, 내부에서 지정한 값(200)
+
+        function sample3() {
+          const num2 = 30000;
+        }
+      }
+
+      console.log(`sample2 외부 : ${num1}`); // 100, 외부에서 지정한 값(100), 내부에서 지정한 값 인식 안함
+      //   console.log(`num2 : ${num2}`); // num2 is not defined(정의되어 있지 않다는 오류)
+
+      sample2();
+    </script>
+
+    <!-- 익명 함수 -->
+    <script>
+      /* const 변수 = function (파라미터) {return 결과값;}
+         - 일반 함수 형식에서 함수명 없음
+         - 형식 자체를 const 변수 안에 담음
+      */
+      const minus = function (a, b) {
+        return a - b;
+      };
+      console.log(minus(70, 30)); // 40
+    </script>
+
+    <!-- 화살표 함수 -->
+    <script>
+      /* const 변수 = (파라미터) => {return 결과값;}
+         - 익명함수 형식에서 function 없음
+         - 파라미터와 결과값 사이 => 
+      */
+      const minus2 = (a, b) => {
+        return a - b;
+      };
+      //   const minus2 = (a, b) => a - b;  ->  한 줄로 작성도 가능
+      console.log(minus2(100, 30)); // 70
+    </script>
+
+    <!-- 배열.함수(콜백함수) -->
+    <script>
+      const arr = [1, 2, 3, 4, 5, 6, 7];
+      // forEach : 값을 하나씩 가져올 수 있다.
+      // 배열.forEach((값, 인덱스, 배열) => {});
+      arr.forEach((data, index, array) => {
+        // 값(data)만 입력, 인덱스와 배열은 생략
+        console.log(data);
+        console.log(index);
+        // console.log(array);
+      });
+
+      // map : 리턴한 값들을 기반으로 새로운 배열을 만든다.
+      // 배열.map((값, 인덱스, 배열) => {})
+      const arr2 = arr.map(function (data) {
+        // 값(data)만 입력, 인덱스와 배열은 생략
+        return data * 2;
+      });
+      console.log(arr2);
+
+      // filiter : 리턴한 값들이 true인 것들만 모아서 새로운 배열을 만든다.
+      // 배열.filter((값, 인덱스, 배열) => {});
+      const arr3 = arr.filter((data) => {
+        // 값(data)만 입력, 인덱스와 배열은 생략
+        return data % 2 === 0;
+      });
+      console.log(arr3);
+
+      // reduce : 하나의 결과값을 반환한다.('하나'의 값만 만듬)
+      // 배열.reduce((누적된값, 값, 인덱스, 배열) => {}, 초기값)
+      const result2 = arr.reduce((accumulator, data) => {
+        //accumulator : 누적되는 값
+        return accumulator + data; // acc = acc + data
+      }, 2); // acc를 2로 지정하고 시작
+      console.log(result2); // 28(배열에 있는 값들을 다 합친 값)
+    </script>
+  </body>
+</html>

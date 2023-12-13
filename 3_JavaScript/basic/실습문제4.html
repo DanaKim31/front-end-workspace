@@ -12,68 +12,175 @@
         if (i % 5 === 0) continue;
         console.log(i);
       }
+      /* 강사님 풀이
+      for (let i = 100; i <= 200; i++) {
+        if (i % 5 !== 0) {
+          console.log(i);
+        }
+      }
+      */
     </script>
 
     <!-- Q2. 1 ~ 1000 정수 중 3의 배수의 합계를 출력하세요 -->
     <script>
+      console.log("Q2-------------------------");
       let sum = 0;
       for (let i = 1; i <= 1000; i++) {
         if (i % 3 === 0) sum += i;
       }
       console.log(sum);
+      /* 강사님 풀이
+      let sum = 0;
+      for (let i = 1; i <= 1000; i++) {
+        if (i % 3 === 0) {
+          sum += i;
+        }
+      }
+      console.log("합계" " + sum");
+      */
     </script>
 
     <!-- Q3. 문자열의 문자들을 하나씩 출력하세요 -->
     <script>
+      console.log("Q3-------------------------");
       const str = "안녕하세요. 반갑습니다!";
       for (let i = 0; i < str.length; i++) {
         console.log(str[i]);
       }
+      /* 강사님 풀이(두 번째 방법)
+      for(const i in str) {    >> i : index
+        console.log(str[i]);
+      }
+      */
+      /* 강사님 풀이(세 번째 방법)
+      for(const i of str) {    >> i : value
+        console.log(i);
+      }
+      */
+      /* 강사님 풀이(네 번째 방법)
+      let i = 0;
+      while(i < str.length) {
+        console.log(str[i]);
+        i++;
+      }
+      */
     </script>
 
     <!-- Q4. 배열 값 중 최대값을 출력하세요 -->
     <script>
+      console.log("Q4-------------------------");
       const nums = [3, 7, 12, 5, 3];
-      nums.sort();
       nums.sort((a, b) => a - b);
       console.log(nums[nums.length - 1]);
+      /* 강사님 풀이(두 번째 방법)
+      const nums = [3, 7, 12, 5, 3];
+      let max = nums[0];
+      for(let num of nums) {
+        if (max < num) {
+          max = num;
+        }
+      }
+      console.log("최대값 : ${max}");
+      */
+      // console.log(num); // max : 3, num : 3
+      // max : 3, num : 7 -> max < num(비교해서 큰 값을 max로 지정) -> max : 7
+      // max : 7, num : 12 -> max : 12
+      // max : 12, num : 5 -> max : 12
+      // max : 12, num : 3 -> max : 12
     </script>
 
     <!-- Q5. 1 ~ 100 정수 중 소수를 출력하세요 -->
     <script>
+      console.log("Q5-------------------------");
       for (let i = 1; i <= 100; i++) {
         if (i % i !== 1) continue;
         console.log(i);
+      }
+      /* 강사님 풀이 */
+      for (let i = 2; i <= 100; i++) {
+        for (let j = 2; j <= i; j++) {
+          if (i % j === 0) {
+            if (i !== j) {
+              console.log(i, j);
+              break;
+            } else if (i === j) {
+              console.log(i);
+            }
+          }
+        }
       }
     </script>
 
     <!-- Q6. 배열 안의 데이터를 모두 2배로 만들어서 출력하세요 -->
     <script>
+      console.log("Q6-------------------------");
       const nums2 = [1, 3, 5];
+      // for문
       for (let i = 0; i < nums2.length; i++) {
         console.log(nums2[i] * 2);
       }
+
+      // forEach
+      nums2.forEach((num) => {
+        console.log(num * 2);
+      });
+
+      // map (두 줄, 한 줄)
+      // const nums4 = nums2.map((num) => {
+      //   return num * 2;
+      // });
+      const nums4 = nums2.map((num) => num * 2);
+      console.log(nums4);
     </script>
 
     <!-- Q7. 배열에 있는 데이터들로 합계와 평균을 출력하세요 -->
     <script>
+      console.log("Q7-------------------------");
       const nums3 = [90, 85, 70, 86, 97];
+      // for문
       let sum1 = 0;
       for (let i = 0; i < nums3.length; i++) {
         sum1 += nums3[i];
       }
       console.log(sum1);
       console.log(sum1 / nums.length);
+
+      // for in문
+      let sum2 = 0;
+      for (index in nums3) {
+        console.log(nums3[index]);
+        sum2 += nums3[index];
+      }
+      console.log(`합계 : ${sum2}, 평균 : ${sum2 / nums3.length}`);
+
+      // reduce
+      const sum3 = nums3.reduce((ac, num) => ac + num);
+      console.log(`합계 : ${sum3}`);
     </script>
 
     <!-- Q8. 두 배열의 각 데이터의 곱셈을 한 데이터들로 이루어진 새로운 배열을 생성하여 출력하세요 -->
     <script>
+      console.log("Q8-------------------------");
       const a1 = [12, 0, 2, 5, 4];
       const b1 = [5, 15, 6, 7, 8];
-      const c1 = [];
+      let c1 = [];
+      // for문
       for (let i = 0; i < a1.length; i++) {
         c1.push(a1[i] * b1[i]);
       }
+      console.log(c1);
+
+      // for in문
+      for (i in a1) {
+        c1.push(a1[i] * b1[i]);
+      }
+      console.log(c1);
+
+      // forEach문
+      c1 = [];
+      a1.forEach((value, index) => {
+        c1.push(value * b1[index]);
+      });
       console.log(c1);
     </script>
 
@@ -81,8 +188,17 @@
             배열.includes(데이터) : 해당 데이터가 배열에 있으면 true, 없으면 false
     -->
     <script>
+      console.log("Q9-------------------------");
       const a2 = [12, 0, 2, 5, 4];
       const b2 = [0, 2, 3, 12, 8];
+      const c2 = [];
+      a2.forEach((value) => {
+        // console.log(value, b2.inludes(value)); // a2 배열의 값(value)를 가져왔을 때 b2 배열의 값과 일치
+        if (b2.includes(value)) {
+          c2.push(value);
+        }
+      });
+      console.log(c2);
     </script>
 
     <!-- Q10. 2차원 배열에는 3명의 학생의 4과목 성적이 들어 있습니다. 각 학생들의 합계와 평균을 출력하세요 -->

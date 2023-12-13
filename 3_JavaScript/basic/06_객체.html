@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>객체</title>
+  </head>
+  <body>
+    <h1>객체(Object)</h1>
+
+    <!-- 객체 생성 -->
+    <script>
+      const person = {};
+      const person2 = new Object(); /* 거의 안 씀! */
+
+      console.log(person); // {} -> 객체(person)에 변수와 함수 적용 전
+      console.log(person2); // {} -> 객체(person)에 변수와 함수 적용 전
+
+      /* 변수 : 속성, 특징들 추가(변수로 담아냄) */
+      person.name = "권예빈"; // 변수.키 = 값
+      person.age = 9;
+
+      /* 함수 : 기능들 추가
+                익명함수만 사용 가능(선언적 함수, 화살표 함수 사용 불가능) */
+      /* this : 같은 객체(person)의 특징(변수) 적용 시 사용 */
+      person.hello = function () {
+        console.log(`안녕? 나는 ${this.name}이고, 나이는 ${this.age}살!`);
+      };
+
+      console.log(person);
+      console.log(person.age); // 9 -> person의 age 값
+      person.hello();
+
+      const person3 = {
+        name: "이상현", // 키 : name, 값 : "이상현"
+        age: 12,
+        // hello라는 키의 값을 함수(function)로 넣은 것
+        hello: function () {
+          console.log(`안녕? 나는 ${this.name}이고, 나이는 ${this.age}살!`);
+        },
+      };
+
+      person3.hello(); // 안녕? 나는 이상현이고, 나이는 12살!
+
+      // 객체 속 키 삭제 : delete 변수.키
+      delete person3.hello;
+
+      console.log(person3);
+      //   person3.hello(); // 오류
+
+      /*
+        const 변수 = {
+            키: 값,
+            키: 값,
+            ...
+        }
+
+        * 객체에 추가 & 수정
+            변수.키 = 값;  >  지정한 키 값이 없을 경우 새로운 키로 생성도 가능
+
+            * 데이터에 접근
+            변수.키;   <-- 속성인 경우
+            변수.키(); <-- 함수인 경우
+      */
+      //   window.alert("경고!"); // alert("경고!"); 만으로도 사용가능(window 생략 가능)
+      console.log(window);
+    </script>
+
+    <!-- 틀 1 : 생성자(constructor) 함수 -->
+    <script>
+      function Person(name, age) {
+        this.name = name; // this: Person
+        this.age = age;
+        this.hello = function () {
+          console.log(`안녕? 나는 ${this.name}이고, 나이는 ${this.age}살!`);
+        };
+      } // ----> 틀
+      const p1 = new Person("한경수", 15);
+      console.log(p1);
+      p1.hello();
+
+      // walk 라는 기능을 나중에 추가!
+      // 보안성을 위해 prototype 지정
+      Person.prototype.walk = function () {
+        console.log("가볍게 산책 중~");
+      };
+
+      const p2 = new Person("정대윤", 18);
+      p2.hello();
+    </script>
+
+    <!-- 틀 2 : 클래스 -->
+    <script>
+      class Person2 {
+        // 생성자 -> 객체 생성하는 순간 호출!
+        constructor(name, age) {
+          this.name = name;
+          this.age = age;
+        }
+
+        hello() {
+          console.log(`안녕? 나는 ${this.name}이고, 나이는 ${this.age}살!`);
+        }
+      }
+      const p3 = new Person2("윤민영", 21);
+      console.log(p3);
+      p3.hello();
+    </script>
+  </body>
+</html>
