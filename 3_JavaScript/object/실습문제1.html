@@ -59,14 +59,14 @@
 
     <script>
       function printValue() {
-        const result1 = document.querySelector("#result1");
-        const customer = document.querySelector("#customer").value;
-        const product = document.querySelector("#product").value;
-        const price = document.querySelector("#price").value;
-        // console.log(customer);
-        // console.log(product);
-        // console.log(price);
-        result1.innerHTML = `${customer}님의 구매상품은 ${product}, 구매 가격은 ${price}원 입니다.`;
+        // const result1 = document.querySelector("#result1");
+        // const customer = document.querySelector("#customer").value;
+        // const product = document.querySelector("#product").value;
+        // const price = document.querySelector("#price").value;
+        // result1.innerHTML = `${customer}님의 구매상품은 ${product}, 구매 가격은 ${price}원 입니다.`;
+
+        // 더 간단한 풀이
+        result1.innerHTML = `${customer.value}님의 구매상품은 ${product.value}, 구매 가격은 ${price.value}원 입니다.`;
       }
     </script>
 
@@ -94,11 +94,17 @@
 
     <script>
       function stringLength() {
-        const text1 = document.querySelector("#text1").value;
-        // console.log(input);
-        // console.log(text1.length);
-        result2.innerHTML = `보기의 문자열 길이는 ${text1.length}글자 입니다.`;
+        result2.innerHTML = `보기의 문자열 길이는 ${text1.value.length}글자 입니다.`;
       }
+      /*강사님 풀이
+      function stringLength() {
+        const text = document.querySelector("#text1");
+        const result = document.querySelector("#result2");
+        // console.log(text.value.length);  // input에 쓰인 값(value)의 길이(lenght)를 가져옴. value는 input 태그에서만 쓰임
+        // console.log(result);
+        result.innerHTML = `보기의 문자열 길이는 ${text.value.length}글자 입니다.`
+      }
+      */
     </script>
 
     <hr />
@@ -123,8 +129,47 @@
 
     <script>
       function stringSplit() {
-        const
+        // 1. querySelector 1(보기) = innerHTML
+        // 2. querySelector 2(출력 값)
+        // 3. 보기 텍스트를 , 기준 배열로 바꾸기
+        // 4. 배열 split(",") + 반복문
+        // 5-1. js 태그 생성하는 방법으로 ol, li태그 사용
+        // 5-2. index 사용
+
+        /* 강사님 풀이 */
+        const label = document.querySelector("#la1");
+        const result = document.querySelector("#result3");
+
+        // 필요한 태그 만들기 : createElement("태그종류")
+        const ol = document.createElement("ol");
+        // const li = document.createElement("li");  --> for 문에서 사용
+
+        // 배열생성, 생성한 배열을 const로 묶기
+        const arr = label.innerHTML.split(",");
+
+        // ol & li 사용 (첫 번째 풀이)
+        // 배열 내 값만 가져오기
+        for (let data of arr) {
+          // console.log(data);
+          const li = document.createElement("li");
+          li.innerHTML = data; // li 태그에 다섯개 각 텍스트 넣음
+          ol.appendChild(li); // 부모태그(ol)에 자식태그(li)를 등록
+        }
+        result.appendChild(ol); // (for문 바깥으로 나와서) result(부모태그)에 ol(자식태그) 추가
       }
+
+      /* index 사용 (두 번째 풀이) 
+        // for(let i = 0; i < arr.length; i++) {} 또는 let in 사용
+      for (let i in arr) {
+        // console.log(i, arr[i]);
+        // consold.log(`${Number(i) + 1}. ${arr[i]}`); --> 시퀀스. 각 데이터 를 배열로 노출
+
+        // += 에서 +가 없으면 마지막(5.한약) 데이터만 노출 됨
+        // br 태그 넣지 않으면 한 줄로 출력 됨
+        // for in이 아닌 for 문으로 풀이 연습!
+        result.innerHTML += `${Number(i) + 1}. ${arr[i]}<br>`  
+      }
+        */
     </script>
 
     <hr />
@@ -164,7 +209,31 @@
     <button onclick="arrayTest();">처리 및 출력</button>
 
     <script>
-      function arrayTest() {}
+      // 1. 보기 / 삭제할 음식 인풋 / 추가할 음식 인풋 / 출력영역 접근
+      // 2. 보기 문자열을 배열로 변경
+      // 3. 출력영역 배열을 문자열로 변경
+      // 4.
+      function arrayTest() {
+        const preview = document.querySelector("#preview");
+        const remove = document.querySelector("#remove").value;
+        const add = document.querySelector("#add").value;
+        const result = document.querySelector("#result4");
+
+        const arr = preview.innerHTML.split(" ");
+        // console.log(arr);
+
+        // 배열에서 인덱스 찾기
+        const index = arr.indexOf(remove);
+        // console.log(index)
+
+        // 배열에서 삭제
+        arr.splice(index, 1); // const index의 인덱스의 값 1개 삭제
+
+        // 배열에 추가
+        arr.push(add);
+
+        result.innerHTML = arr.join(" ");
+      }
     </script>
 
     <hr />
@@ -203,7 +272,38 @@
     </div>
 
     <script>
-      function addStudent() {}
+      // 1. 입력받아야 하는 데이터 prompt로 받기(9개) 객체
+      // 2. 이름/나이/주소 접근(querySelectorAll) > 객체 3개로 구성된 배열
+      // 3. 이름/나이/주소를 가지고 있는 객체 세개
+      // 4. for문 사용(0~2), 입/출력 두개
+      function Student(name, age, addr) {
+        this.name = name;
+        this.age = age;
+        this.addr = addr;
+      }
+      function addStudent() {
+        // 입력
+        const arr = [];
+        for (let i = 0; i < 3; i++) {
+          const name = prompt(`${i + 1}번째 학생 이름 입력`);
+          const age = prompt(`${i + 1}번째 학생 나이 입력`);
+          const addr = prompt(`${i + 1}번째 학생 주소 입력`);
+          // 객체 3개는 for문 안에서 생성
+          const student = new Student(name, age, addr);
+          arr.push(student);
+        }
+
+        // 출력
+        const names = document.querySelectorAll(".name");
+        const ages = document.querySelectorAll(".age");
+        const addrs = document.querySelectorAll(".addr");
+
+        for (let i = 0; i < 3; i++) {
+          names[i].innerHTML = arr[i].name;
+          ages[i].innerHTML = arr[i].age;
+          addrs[i].innerHTML = arr[i].addr;
+        }
+      }
     </script>
   </body>
 </html>
