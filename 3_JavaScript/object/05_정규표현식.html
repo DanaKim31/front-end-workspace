@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>정규표현식</title>
+  </head>
+  <body>
+    <h1>정규표현식</h1>
+
+    <h2>정규표현식과 함께 쓰이는 함수들</h2>
+    <div id="area1"></div>
+    <script>
+      const str1 = "html css javascript";
+      const regExp1 = /script/;
+      area1.innerHTML += `regExp1.test(str1) : ${regExp1.test(str1)}<br>`; // true(test : 'script'라는 텍스트가 존재)
+      area1.innerHTML += `regExp1.exec(str1) : ${regExp1.exec(str1)}<br>`; // script(script : 해당하는 '값'을 리턴), 어디서 가져오는지/값이 없거나 다를경우 null
+      area1.innerHTML += `str1.match(regExp1) : ${str1.match(regExp1)}<br>`; // script(문자표현식에서 str1의 값을 찾아서 일치하는 값만), 어디서 가져오는지/값이 없거나 다를경우 null
+      area1.innerHTML += `str1.search(regExp1) : ${str1.search(regExp1)}<br>`; // 13(찾은 문자열의 시작 index, str1에서 'script'의 's'의 index), 해당하는 값이 없을경우 -1
+      area1.innerHTML += `str1.replace(regExp1, 변경할 값) : ${str1.replace(
+        regExp1,
+        "스크립트"
+      )}<br> `;
+      area1.innerHTML += `str1.split(regExp1) : ${str1.split(regExp1)}`; // html css java, -> script에서 짤라내서 'java,' 로 리턴
+    </script>
+
+    <br />
+    <hr />
+
+    <h2>플래그 문자</h2>
+
+    <div id="area2"></div>
+    <script>
+      const str2 = "HTML Css JAcaScript";
+      // replace 함수에서 '$&'는 패턴을 만족하는 문자열을 가리킴
+      area2.innerHTML += `/c/ : ${str2.replace(/c/, "($&)")}<br>`; // HTML Css JAvaS(c)ript -> $& : 패턴으로 지정한 문자(c)를 괄호 안에 넣어서 리턴
+      area2.innerHTML += `/c/i : ${str2.replace(/c/i, "($&)")}<br>`; // HTML (C)ss JAvaScript -> i : 대소문자 구분 안 함
+      area2.innerHTML += `/s/g : ${str2.replace(/s/g, "($&)")}<br>`; // C(s)(s) JAcaScript -> g : 문자열에 포함된 지정한 문자 모두 괄호 안에 넣어서 리턴
+      area2.innerHTML += `/s/ig(=gi) : ${str2.replace(/s/gi, "($&)")}<br>`; // HTML C(s)(s) JAca(S)cript -> 문자열에 포함된 지정한 문자 모두, 대소문자 구분 없이 괄호 안에 넣어서 리턴
+    </script>
+
+    <br />
+    <hr />
+
+    <h2>메타 문자</h2>
+    <h3>반복 검색</h3>
+    <div id="area3"></div>
+    <script>
+      const str3 = "a aa aaa aaaa";
+      area3.innerHTML += `/a{1,2}/g : ${str3.replace(/a{1,2}/g, "($&)")}<br>`; // (a) (aa) (aa)(a) (aa)(aa) -> 첫 글자 허용, 두 글자 허용
+      area3.innerHTML += `/a{3}/g : ${str3.replace(/a{3}/g, "($&)")}<br>`; // a aa (aaa) (aaa)a
+      area3.innerHTML += `/a{2,}/g : ${str3.replace(/a{2,}/g, "($&)")}<br>`; // a (aa) (aaa) (aaaa) -> a가 두개 이상
+      area3.innerHTML += `/a+/g : ${str3.replace(/a+/g, "($&)")}<br>`; // (a) (aa) (aaa) (aaaa) -> 최소 한 글자~
+      area3.innerHTML += `/a?/g : ${str3.replace(/a?/g, "($&)")}<br>`; // 최소 0(띄어쓰기) ~ 최대 1
+    </script>
+
+    <br />
+
+    <h3>문자열의 앞, 뒤 구분</h3>
+    <div id="area4"></div>
+    <script>
+      const str4 = "Javascript\njQuery\nAjax\nReact";
+      area4.innerHTML += `/^j/ig : ${str4.replace(/^j/gi, "($&)")}<br>`; // 문자열 전체가 j로 시작하는지 체크
+      area4.innerHTML += `/ct$/ig : ${str4.replace(/ct$/gi, "($&)")}<br>`; // Javascript jQuery Ajax Rea(ct) -> 문자열 전체가 ct로 끝나는지 체크
+    </script>
+
+    <h3>OR 검색</h3>
+    <div id="area5"></div>
+    <script>
+      let str5 = "Javascript jQuery Ajax";
+      area5.innerHTML += `/[aj]/ig : ${str5.replace(/[aj]/gi, "($&)")}<br>`; // (J)(a)v(a)script (j)Query (A)(j)(a)x -> 문자열에서 대소문자 구분없이, 모두 a 또는 j 괄호
+      // [] 내의 ^ : not을 의미
+      area5.innerHTML += `/[^aj]/ig : ${str5.replace(/[^aj]/gi, "($&)")}<br>`; // Ja(v)a(s)(c)(r)(i)(p)(t)( )j(Q)(u)(e)(r)(y)( )Aja(x) -> aj가 아닌 것 들만 ()안에 리턴
+      area5.innerHTML += `/^[aj]/ig : ${str5.replace(/^[aj]/gi, "($&)")}<br>`; // /^[aj]/ig : (J)avascript jQuery Ajax
+
+      str5 = "123 JavaScript";
+      area5.innerHTML += `/[a-z]/g : ${str5.replace(/[a-z]/g, "($&)")}<br>`; // 123 J(a)(v)(a)S(c)(r)(i)(p)(t) -> 소문자 a부터 z까지 괄호 안에 표시
+      area5.innerHTML += `/[A-Z]/g : ${str5.replace(/[A-Z]/g, "($&)")}<br>`; // 123 (J)ava(S)cript -> 대문자 A부터 Z까지
+      area5.innerHTML += `/[0-9]/g : ${str5.replace(/[0-9]/g, "($&)")}<br>`; // (1)(2)(3) JavaScript -> 0부터 9까지
+      area5.innerHTML += `/[0-9A-Z]/g : ${str5.replace(
+        /[0-9A-Z]/g,
+        "($&)"
+      )}<br>`; // (1)(2)(3) (J)ava(S)cript -> 0부터 9까지, 대문자 A부터 Z까지
+      area5.innerHTML += `/[0-9A-Za-z]/g : ${str5.replace(
+        /[0-9A-Za-z]/g,
+        "($&)"
+      )}<br>`; // 0부터 9까지, 대문자 A부터 Z까지, 소문자 a부터 z까지
+    </script>
+
+    <br />
+
+    <h3>임의의 문자열 검색</h3>
+    <div id="area6"></div>
+    <script>
+      const str6 = "123 JavaScript";
+      area6.innerHTML += `/..../g : ${str6.replace(/..../g, "($&)")}<br>`; // (123 )(Java)(Scri)pt -> 띄어쓰기 포함 4글자(....)씩 괄호로 묶기
+    </script>
+
+    <h3>추가 메타 문자</h3>
+    <div id="area7"></div>
+    <script>
+      const str7 = "A1 B2 C3 d_4 e:5 ` ffgg77--__--`\t가\n나\n다";
+      // /\d/g : /[0-9]/g 와 결과가 같다
+      area7.innerHTML += `/\d/g : ${str7.replace(/\d/g, "($&)")}<br>`; // A(1) B(2) C(3) d_(4) e:(5) ` ffgg(7)(7)--__--` 가 나 다
+      area7.innerHTML += `/\D/g : ${str7.replace(/\D/g, "($&)")}<br>`; // 숫자가 아닌 모든 문자(띄어쓰기 포함)
+      area7.innerHTML += `/\w/g : ${str7.replace(/\w/g, "($&)")}<br>`; // 알파벳, 숫자, 언더바(공백 제외)
+      area7.innerHTML += `/\W/g : ${str7.replace(/\W/g, "($&)")}<br>`; // 알파벳, 숫자, 언더바가 아닌 것에만 괄호
+      area7.innerHTML += `/\s/g : ${str7.replace(/\s/g, "($&)")}<br>`; // 공백에만 괄호
+      area7.innerHTML += `/\S/g : ${str7.replace(/\S/g, "($&)")}<br>`; // 공백이 아닌 것에만 괄호
+    </script>
+
+    <br />
+    <hr />
+
+    <h2>연습</h2>
+    <h3>주민등록번호 확인</h3>
+    <div id="area8">
+      <input type="text" placeholder="- 포함해서 입력하세요" id="pno" />
+    </div>
+    <button>확인</button>
+    <script>
+      const btn = document.querySelector("button");
+      // 1단계 : 6글자-7글자
+      // 문제점 : 숫자가 아닌 문자를 입력해도 글자수만 맞으면 정상 입력이라고 뜸
+      let regExp = /^......-.......$/;
+
+      // 2단계 : 숫자값 6개-숫자값 7개([1234]숫자값 6개)
+      // 문제점 : 유효하지 않은 월, 일을 입력해도 정상 입력이라고 뜸
+      regExp = /^\d{6}-[1-4]\d{6}$/;
+
+      // 3단계 :
+      /*
+        - 생년 (두자리) => 아무 숫자로 두자리만 채우면 됨 > \d{2}
+
+        - 생월 (두자리) 
+            => 앞자리가 0일 경우 뒷자리는 1~9 (1월 ~ 9월)
+            => 앞자리가 1일 경우 뒷자리는 0~2 (10월 ~ 12월)
+    
+        - 생일 (두자리)
+            => 앞자리가 0일 경우 뒷자리는 1~9
+            => 앞자리가 1 또는 2일 경우 뒷자리는 0~9
+            => 앞자리가 3일 경우 0~1
+      */
+      regExp = /^\d{2}(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])-[1-4]\d{6}$/;
+
+      btn.addEventListener("click", function () {
+        if (regExp.test(pno.value)) {
+          alert("정상 입력!");
+        } else {
+          alert("잘못 입력!");
+        }
+      });
+    </script>
+  </body>
+</html>
