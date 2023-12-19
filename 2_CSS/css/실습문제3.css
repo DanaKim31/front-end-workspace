@@ -16,7 +16,7 @@ header {
   width: 350px;
   height: 100vh;
   position: fixed;
-  display: flex;
+  /* display: flex; */
   /* background-image 삽입 시 아래 두가지 속성을 주로 함께 사용
      - background-size: cover; 
      - background-position: center;
@@ -24,7 +24,7 @@ header {
   background-image: url(/resources/background.jpg);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
 }
 .header-blackbox {
   width: 100%;
