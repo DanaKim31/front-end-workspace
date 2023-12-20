@@ -1,0 +1,74 @@
+header {
+  position: fixed;
+  background-color: white;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+}
+header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+header nav a {
+  /* a 태그 : inline 요소,  inline-block으로 변경해야 height 설정 가능! */
+  display: inline-block;
+  /* 각 a 태그 높이를 네비게이션 높이와 맞춤 */
+  height: 60px;
+  /* a 태그 내 텍스트(Heading$)의 앞/뒤 줄간격 추가 */
+  line-height: 40px;
+  /* a 태그 텍스트를 네비게이션 상하 가운데 정렬 */
+  padding: 10px;
+}
+header nav a:hover {
+  background-color: black;
+  color: white;
+}
+
+main {
+  /* nav 공간만큼 padding으로 밀어내기 */
+  padding-top: 60px;
+}
+main section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+section h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+main p {
+  text-align: center;
+  line-height: 1.5rem;
+  width: 70%;
+}
+#section1 {
+  background-color: red;
+}
+#section2 {
+  background-color: purple;
+}
+#section3 {
+  background-color: yellow;
+}
+.top {
+  /* a 태그는 inline 요소이기 때문에 width, height 값 설정이 안되지만 display를 설정한 경우에는 설정 가능 */
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background-color: black;
+  color: white;
+  width: 50px;
+  height: 50px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
