@@ -165,7 +165,7 @@ header {
 }
 
 /* header - category */
-.catebory-btn {
+.category-btn {
   /* category 그룹에 absolute 적용을 위해 relative 적용 */
   position: relative;
 }
