@@ -1,0 +1,68 @@
+<!-- vanila.html React ver -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- React CDN -->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+
+    <!-- babel compile (옛날 js 형태로 compile) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- babel compiling -->
+    <script type="text/babel">
+      let counter = 0;
+      const setCount = () => {
+        counter++;
+        ReactDOM.render(<Container />, root); // rerendering
+      };
+
+      /*
+      const setCount = () => {
+        alert("!!!");
+      };
+      const root = document.querySelector("#root");
+
+      // h1 태그
+      // 1. h1 태그 만들기 ("태그종류", {태그속성}, "텍스트")
+      const h1 = React.createElement("h1", null, "Total Clicks : 0");
+
+      // 2. button 태그 만들기
+      const button = React.createElement(
+        "button",
+        { onClick: setCount },
+        "Click!"
+      );
+      const container = React.createElement("div", null, h1, button);
+
+      // 3. root div에 넣기
+      ReactDOM.render(container, root);
+    */
+
+      /* JSX 문법으로 변경 */
+      // Container : 대문자로 시작!
+      const Container = () => {
+        return (
+          <div>
+            <h1>Total Clicks : {counter}</h1>
+            <button onClick={setCount}>Click!</button>
+          </div>
+        );
+      };
+      ReactDOM.render(<Container />, root); // rendering
+    </script>
+  </body>
+</html>
