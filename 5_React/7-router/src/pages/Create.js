@@ -27,6 +27,7 @@ const Create = () => {
   const navigate = useNavigate();
   const [animal, setAnimal] = useState({}); // postman {}
 
+  // 추가 버튼 선택 시 추가한 동물 포함하여 목록화면으로 이동
   const add = async () => {
     await addAnimal(animal);
     navigate("/");
