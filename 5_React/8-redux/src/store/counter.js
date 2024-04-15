@@ -1,3 +1,4 @@
+/* 리덕스 방식
 import { createAction, handleActions } from "redux-actions";
 
 // 액션(Action) : 프로젝트의 상태에 변화를 일으키는 것
@@ -20,3 +21,23 @@ const counter = handleActions(
 ); // 0 : 초기 값 지정 / {} 내 action을 어떻게 다룰 건지
 
 export default counter;
+*/
+
+/* =============== toolkit 방식 =============== */
+import { createSlice } from "@reduxjs/toolkit";
+
+const counter = createSlice({
+  name: "counterSlice",
+  initialState: 0, // 초기값 설정
+  reducers: {
+    increase: (state, action) => {
+      return state + 1;
+    },
+    decrease: (state, action) => {
+      return state - 1;
+    },
+  },
+});
+
+export default counter;
+export const { increase, decrease } = counter.actions;

@@ -1,6 +1,6 @@
 import Header from "./components/Header";
 import { increase, decrease } from "./store/counter";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const App = () => {
   const dispatch = useDispatch();
