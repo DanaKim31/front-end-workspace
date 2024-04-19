@@ -22,26 +22,42 @@
 </template>
 
 <script>
-import { getMovies, delMovie } from "@/api/movie";
+// import { getMovies, delMovie } from "@/api/movie"; // vuex 버전 아닐 경우(axios 버전) 임포트
 
 export default {
   name: "HomePage",
+  /* vuex 안 쓴 버전(axios 버전)
   data() {
     return { movies: [] };
   },
+*/
+  // vuex 버전
+  computed: {
+    movies() {
+      return this.$store.state.movie.movies;
+    },
+  },
   created() {
     // methods에서 만든 fetchMovies 함수 호출
-    this.fetchMovies();
+    // this.fetchMovies(); // vuex 안 쓴 버전(axios 버전)
+    this.$store.dispatch("fetchMovies");
   },
   methods: {
     // getMovies 가져올 메서드
-    async fetchMovies() {
+    /*
+      async fetchMovies() {
       const response = await getMovies();
       this.movies = response.data; // 영화목록 담김
     },
+
     async deleteMovie(no) {
-      await delMovie(no);
-      await this.fetchMovies(); // 삭제 버튼 후 새로고침 없이 바로 삭제를 위해 재호출
+      // await delMovie(no); // vuex 안 쓴 버전(axios 버전)
+      // await this.fetchMovies(); // 삭제 버튼 후 새로고침 없이 바로 삭제를 위해 재호출
+      }
+      
+*/
+    deleteMovie(no) {
+      this.$store.dispatch("deleteMovie", no);
     },
   },
 };
@@ -66,6 +82,11 @@ table {
   }
   td {
     padding-top: 20px;
+  }
+  button {
+    background: black;
+    color: white;
+    cursor: pointer;
   }
 }
 </style>

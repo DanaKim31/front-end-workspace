@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { addMovie } from "@/api/movie";
+// import { addMovie } from "@/api/movie"; // vuex 버전 아닐 경우(axios 버전) 임포트
 
 export default {
   name: "CreatePage",
@@ -29,7 +29,8 @@ export default {
   methods: {
     // 영화 추가 버튼 클릭 매서드
     async sendMovie() {
-      await addMovie(this.movie);
+      // await addMovie(this.movie); // vuex 안 쓴 버전(axios 버전)
+      await this.$store.dispatch("insertMovie", this.movie); // vuex
       this.movie = { title: "", genre: "", actor: "" };
       this.$router.push("/"); // 홈 페이지로 이동
     },
