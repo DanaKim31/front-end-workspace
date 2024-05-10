@@ -1,52 +1,48 @@
-import Header from "../components/Header";
 import styled from "styled-components";
 import { getMovies, delMovie } from "../api/movie";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const StyledDiv = styled.div`
-  width: 900px;
-  margin: auto;
-  text-align: center;
-  h1 {
-    font-size: 2.5rem;
+const Table = styled.table`
+  width: 100%;
+  th {
+    width: 25%;
     font-weight: bold;
-    margin-top: 30px;
   }
-  table {
-    width: 100%;
-    margin-top: 30px;
-    th {
-      width: 25%;
-      font-weight: bold;
-    }
-    td {
-      padding-top: 30px;
-    }
+
+  td {
+    padding-top: 20px;
+    cursor: pointer;
   }
 `;
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
 
-  const moviesAPI = async () => {
+  const navigate = useNavigate();
+
+  const movieAPI = async () => {
     const result = await getMovies();
     setMovies(result.data);
   };
 
   useEffect(() => {
-    moviesAPI();
+    movieAPI();
   }, []);
 
   const onDelete = async (no) => {
     await delMovie(no);
-    moviesAPI();
+    setMovies(movies.filter((movie) => movie.no !== no));
+  };
+
+  const onDetail = (no) => {
+    navigate("/" + no);
   };
 
   return (
-    <StyledDiv>
-      <Header />
+    <>
       <h1>영화 목록</h1>
-      <table>
+      <Table>
         <thead>
           <tr>
             <th>제목</th>
@@ -57,7 +53,7 @@ const Home = () => {
         </thead>
         <tbody>
           {movies.map((movie) => (
-            <tr key={movie.no}>
+            <tr key={movie.no} onClick={() => onDetail(movie.no)}>
               <td>{movie.title}</td>
               <td>{movie.genre}</td>
               <td>{movie.actor}</td>
@@ -67,8 +63,8 @@ const Home = () => {
             </tr>
           ))}
         </tbody>
-      </table>
-    </StyledDiv>
+      </Table>
+    </>
   );
 };
 
